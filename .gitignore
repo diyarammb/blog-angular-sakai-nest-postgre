@@ -1,13 +1,15 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
 # Compiled output
-/dist
+/backend/dist
 /tmp
 /out-tsc
 /bazel-out
 
 # Node
-/node_modules
+/fronted/.angular
+/fronted/node_modules
+/backend/node_modules
 npm-debug.log
 yarn-error.log
 
