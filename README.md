@@ -29,11 +29,24 @@
 cd frontend
 npm install
 ng serve
-
+```
 
 ### ✅ Backend Setup
-
 ```bash
+
 cd backend
 pnpm install
 pnpm start:dev
+```
+
+
+## ✅ Backend Setup  Create a .env file in backend/:
+
+DATABASE_HOST=localhost
+DATABASE_PORT=5432
+DATABASE_USER=postgres
+DATABASE_PASSWORD=
+DATABASE_NAME=
+
+JWT_SECRET=ytoke
+JWT_EXPIRES_IN=1d
