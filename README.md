@@ -41,7 +41,7 @@ pnpm start:dev
 
 
 ## ✅ Backend Setup  Create a .env file in backend/:
-
+```bash
 DATABASE_HOST=localhost
 DATABASE_PORT=5432
 DATABASE_USER=postgres
