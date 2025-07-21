@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg height="1024px" version="1.1" viewBox="0 0 1024 1024" width="1024px" xmlns="http://www.w3.org/2000/svg"
+>
+    <title>2</title>
+    <g fill="none" fill-rule="evenodd" id="2" stroke="none" stroke-width="1">
+        <circle cx="512" cy="512" fill="#3D4DB7" id="circle" r="512"></circle>
+        <rect fill="#9FA8DA" height="716" id="rectangle" width="715" x="154" y="155"></rect>
+        <polygon fill="#121212" id="triangle" points="154 154.5 868.5 154.5 512 870.5"></polygon>
+    </g>
+</svg>

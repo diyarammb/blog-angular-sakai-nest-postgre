@@ -1,0 +1,27 @@
+<div class="layout-topbar">
+    <a class="layout-topbar-logo" routerLink="">
+        <img
+            alt="logo"
+            src="assets/layout/images/{{layoutService.config().colorScheme === 'light' ? 'logo-dark' : 'logo-white'}}.svg">
+        <span>DIPO</span>
+    </a>
+
+    <button #menubutton (click)="layoutService.onMenuToggle()" class="p-link layout-menu-button layout-topbar-button">
+        <i class="pi pi-bars"></i>
+    </button>
+
+    <button #topbarmenubutton (click)="layoutService.showProfileSidebar()"
+            class="p-link layout-topbar-menu-button layout-topbar-button">
+        <i class="pi pi-ellipsis-v"></i>
+    </button>
+
+    <div #topbarmenu [ngClass]="{'layout-topbar-menu-mobile-active': layoutService.state.profileSidebarVisible}"
+         class="layout-topbar-menu">
+        
+        <button class="p-link layout-topbar-button" (click)="onLogout()" >
+            <i class="pi pi-user"></i>
+            <span>Profile</span>
+        </button>
+       
+    </div>
+</div>

@@ -1,0 +1,125 @@
+<div class="grid">
+    <div class="col-12">
+        <div class="card px-6 py-6">
+            <p-toast></p-toast>
+            <p-toolbar styleClass="mb-4">
+                <ng-template pTemplate="left">
+                    <div class="my-2">
+                        <button (click)="openNew()" class="p-button-success mr-2" icon="pi pi-plus" label="New" pButton
+                            pRipple></button>
+                        <button (click)="deleteSelectedPosts()" [disabled]="!selectedPosts?.length"
+                            class="p-button-danger" icon="pi pi-trash" label="Delete" pButton pRipple></button>
+                    </div>
+                </ng-template>
+                <ng-template pTemplate="right">
+                    <button (click)="dt.exportCSV()" class="p-button-help" icon="pi pi-upload" label="Export" pButton
+                        pRipple></button>
+                </ng-template>
+            </p-toolbar>
+
+            <p-table #dt [(selection)]="selectedPosts" [columns]="cols" [value]="posts" dataKey="id" [paginator]="true"
+                [rows]="10" [rowsPerPageOptions]="[10,20,30]" [globalFilterFields]="['title','author']"
+                currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" selectionMode="multiple"
+                [rowHover]="true" responsiveLayout="scroll">
+                <ng-template pTemplate="caption">
+                    <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
+                        <h5 class="m-0">Manage Blog Posts</h5>
+                        <span class="block mt-2 md:mt-0 p-input-icon-left">
+                            <i class="pi pi-search"></i>
+                            <input (input)="onGlobalFilter(dt, $event)" class="w-full sm:w-auto" pInputText
+                                placeholder="Search...">
+                        </span>
+                    </div>
+                </ng-template>
+
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th style="width: 3rem">
+                            <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                        </th>
+                        <th pSortableColumn="id">ID <p-sortIcon field="id"></p-sortIcon></th>
+                        <th pSortableColumn="title">Title <p-sortIcon field="title"></p-sortIcon></th>
+                        <th pSortableColumn="author">Author <p-sortIcon field="author"></p-sortIcon></th>
+                        <th pSortableColumn="publishedDate">Published Date <p-sortIcon
+                                field="publishedDate"></p-sortIcon></th>
+                        <th>Actions</th>
+                    </tr>
+                </ng-template>
+
+                <ng-template let-post pTemplate="body">
+                    <tr>
+                        <td><p-tableCheckbox [value]="post"></p-tableCheckbox></td>
+                        <td>{{ post.id }}</td>
+                        <td>{{ post.title }}</td>
+                        <td>{{ post.author }}</td>
+                        <td>{{ post.createdAt}}</td>
+                        <td>
+                            <div class="flex">
+                                <button (click)="editPost(post)" class="p-button-rounded p-button-success mr-2"
+                                    icon="pi pi-pencil" pButton pRipple></button>
+                                <button (click)="deletePost(post)" class="p-button-rounded p-button-warning"
+                                    icon="pi pi-trash" pButton pRipple></button>
+                            </div>
+                        </td>
+                    </tr>
+                </ng-template>
+
+            </p-table>
+        </div>
+
+        <!-- Add/Edit Dialog -->
+        <p-dialog [(visible)]="postDialog" [modal]="true" [style]="{width: '450px'}" header="Post Details"
+            class="p-fluid">
+            <ng-template pTemplate="content">
+                <div class="field">
+                    <label for="title">Title</label>
+                    <input id="title" type="text" pInputText [(ngModel)]="post.title" required
+                        [ngClass]="{'ng-invalid ng-dirty': submitted && !post.title}" />
+                    <small *ngIf="submitted && !post.title" class="ng-dirty ng-invalid">Title is required.</small>
+                </div>
+                <div class="field">
+                    <label for="author">Author</label>
+                    <input id="author" type="text" pInputText [(ngModel)]="post.author" />
+                </div>
+                <div class="field">
+                    <label for="content">Content</label>
+                    <textarea id="content" rows="5" pInputTextarea [(ngModel)]="post.content"></textarea>
+                </div>
+            </ng-template>
+            <ng-template pTemplate="footer">
+                <button (click)="hideDialog()" class="p-button-text" icon="pi pi-times" label="Cancel" pButton
+                    pRipple></button>
+                <button (click)="savePost()" class="p-button-text" icon="pi pi-check" label="Save" pButton
+                    pRipple></button>
+            </ng-template>
+        </p-dialog>
+
+        <!-- Single Delete Dialog -->
+        <p-dialog [(visible)]="deletePostDialog" [modal]="true" [style]="{width:'450px'}" header="Confirm">
+            <div class="flex align-items-center justify-content-center">
+                <i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem"></i>
+                <span *ngIf="post">Are you sure you want to delete <b>{{ post.title }}</b>?</span>
+            </div>
+            <ng-template pTemplate="footer">
+                <button (click)="deletePostDialog = false" class="p-button-text" icon="pi pi-times" label="No" pButton
+                    pRipple></button>
+                <button (click)="confirmDelete()" class="p-button-text" icon="pi pi-check" label="Yes" pButton
+                    pRipple></button>
+            </ng-template>
+        </p-dialog>
+
+        <!-- Multiple Delete Dialog -->
+        <p-dialog [(visible)]="deletePostsDialog" [modal]="true" [style]="{width:'450px'}" header="Confirm">
+            <div class="flex align-items-center justify-content-center">
+                <i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem"></i>
+                <span>Are you sure you want to delete selected posts?</span>
+            </div>
+            <ng-template pTemplate="footer">
+                <button (click)="deletePostsDialog = false" class="p-button-text" icon="pi pi-times" label="No" pButton
+                    pRipple></button>
+                <button (click)="confirmDeleteSelected()" class="p-button-text" icon="pi pi-check" label="Yes" pButton
+                    pRipple></button>
+            </ng-template>
+        </p-dialog>
+    </div>
+</div>

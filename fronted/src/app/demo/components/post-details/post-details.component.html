@@ -1,0 +1,22 @@
+<div class="surface-ground flex align-items-center justify-content-center min-h-screen overflow-hidden px-4">
+    <div class="w-full md:w-8 lg:w-6 xl:w-5 surface-card p-6 shadow-2 border-round">
+        <img *ngIf="post?.image" [src]="post.image" alt="Post image" class="w-full border-round mb-4 max-h-30rem object-cover" />
+
+        <h1 class="text-900 text-3xl lg:text-4xl font-bold mb-3">{{ post?.title }}</h1>
+
+        <div class="text-600 mb-3 flex align-items-center gap-3">
+            <span class="pi pi-user text-sm"></span>
+            <span class="text-sm">{{ post?.author || 'Unknown Author' }}</span>
+            <span class="pi pi-calendar text-sm ml-4"></span>
+            <span class="text-sm">{{ post?.createdAt }}</span>
+        </div>
+
+        <p class="text-base text-700 leading-relaxed whitespace-pre-line">{{ post?.content }}</p>
+
+        <div class="mt-5">
+            <a [routerLink]="['/']" class="text-blue-500 hover:underline">
+                ← Back to Blog
+            </a>
+        </div>
+    </div>
+</div>

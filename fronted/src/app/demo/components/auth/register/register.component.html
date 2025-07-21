@@ -1,0 +1,59 @@
+<div class="surface-ground flex align-items-center justify-content-center min-h-screen min-w-screen overflow-hidden">
+  <div class="flex flex-column align-items-center justify-content-center">
+    <div
+      style="border-radius: 56px; padding: 0.3rem; background: linear-gradient(180deg, var(--primary-color) 10%, rgba(33, 150, 243, 0) 30%)">
+      <div class="w-full surface-card py-8 px-5 sm:px-8" style="border-radius: 53px">
+        <div class="text-center mb-5">
+          <img alt="Avatar" class="mb-3" height="50" src="assets/demo/images/login/avatar.png" />
+          <div class="text-900 text-3xl font-medium mb-3">Create Account</div>
+          <span class="text-600 font-medium">Register to continue</span>
+        </div>
+
+        <div>
+          <label class="block text-900 text-xl font-medium mb-2" for="name">Full Name</label>
+          <input
+            id="name"
+            type="text"
+            pInputText
+            class="w-full md:w-30rem mb-5"
+            placeholder="Your name"
+            [(ngModel)]="name"
+          />
+
+          <label class="block text-900 text-xl font-medium mb-2" for="email">Email</label>
+          <input
+            id="email"
+            type="email"
+            pInputText
+            class="w-full md:w-30rem mb-5"
+            placeholder="Email address"
+            [(ngModel)]="email"
+          />
+
+          <label class="block text-900 text-xl font-medium mb-2" for="password">Password</label>
+          <p-password
+            id="password"
+            [(ngModel)]="password"
+            [toggleMask]="true"
+            inputStyleClass="w-full p-3 md:w-30rem"
+            styleClass="mb-5"
+            placeholder="Password"
+          ></p-password>
+
+          <button
+            class="w-full p-3 text-xl"
+            label="Register"
+            pButton
+            pRipple
+            (click)="onRegister()"
+          ></button>
+
+          <p class="text-center mt-4 text-sm">
+            Already have an account?
+            <a [routerLink]="['/login']" style="color: var(--primary-color)">Login here</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
